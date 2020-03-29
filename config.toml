@@ -47,6 +47,10 @@ paginate = 5
             identifier = "notes"
             name = "Notes"
             url = "/notes"
+        [[languages.en.menu.main]]
+            identifier = "links"
+            name = "Cool blog posts I find"
+            url = "/extblogs"
 
 
 [privacy]
