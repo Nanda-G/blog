@@ -18,11 +18,7 @@ cd public
 git add .
 
 # Commit changes.
-msg="rebuilding site $(date)"
-if [ -n "$*" ]; then
-	msg="$2"
-fi
-git commit -m "$msg"
+git commit -m "$2"
 
 # Push source and build repos.
 git push origin master
