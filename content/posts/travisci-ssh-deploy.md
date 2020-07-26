@@ -165,7 +165,7 @@ And your deploy script would look like:
 
 ## Conclusion
 
-I hope you were able to understand how Travis works and its workflow and how it makes it very easy to deploy and run things without putting in much effort.
+I hope you were able to understand how Travis works, its workflow and how it makes it very easy to deploy and run things without putting in much effort.
 
 Make sure to put some time reading the Travis Documentation, they are really good and it will generally help you do things properly and make the entire process much more effortless.
 
