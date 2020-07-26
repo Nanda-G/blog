@@ -28,7 +28,8 @@ To learn more about the builds & job lifecycle, check out these two posts:
 
 If it's your first time using Travis then you need to define what OS, distribution and/or language your virtual environment will be using. For example:
 
-  ```os: linux
+  ```
+    os: linux
     dist: bionic
     language: python
     python:
@@ -75,14 +76,16 @@ This is very IMPORTANT, make sure that the private key is not on the repository.
 
 Your .travis.yml file must be looking something like this:
 
-```addons:
+```
+addons:
   ssh_known_hosts: <DEPLOY-HOSTNAME>
 
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_<...>_key -iv $encrypted_<...>_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
 - eval "$(ssh-agent -s)"
 - chmod 600 /tmp/deploy_rsa
-- ssh-add /tmp/deploy_rsa```
+- ssh-add /tmp/deploy_rsa
+```
 
 Alright, before we go ahead with deployment, lets add some secrets to the repository, you can do it two ways.
 
@@ -106,7 +109,8 @@ The single line you would use to deploy is:
 
 We need to put this script somewhere in the .travis.yml file, but it can't be just anywhere. We need to follow Travis' build lifecycle events. So, we will use the deploy script lifecycle event which looks like this:
 
-```deploy:
+```
+deploy:
     - provider: script
       skip_cleanup: true
       script:  scp -r $TRAVIS_BUILD_DIR $USERNAME@$HOSTNAME:/path/to/repository/files
@@ -116,7 +120,8 @@ We need to put this script somewhere in the .travis.yml file, but it can't be ju
 
 Or, if you created a separate `scripts/deploy.sh`, add the single `scp` command to the deploy.sh file and then your deploy script would look something like this:
 
-```deploy:
+```
+deploy:
     - provider: script
       skip_cleanup: true
       script: bash scripts/deploy.sh
@@ -136,7 +141,8 @@ Just above both the `before_deploy:` stage you would include a `jobs:` section s
 
 It would look something like this:
 
-```jobs:
+```
+jobs:
     include:
       - stage: deploy
         if: branch = master AND type != pull_request
@@ -150,7 +156,8 @@ If you want to deploy multiple branches, you could add an extra condition, for e
 
 And your deploy script would look like:
 
-```deploy:
+```
+deploy:
        - provider: script
          skip_cleanup: true
          script: bash scripts/deploy_master.sh
@@ -171,7 +178,8 @@ Make sure to put some time reading the Travis Documentation, they are really goo
 
 For example, if someone creates a pull request but their code is really ugly and not properly linted, or want to run tests to make sure nothing broken is being pushed to master, you could add an extra linting and testing stage just above the deploy stage. It would look something like this:
 
-```jobs:
+```
+jobs:
    include:
    - stage: flake8 test
      if: type = pull_request
