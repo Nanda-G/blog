@@ -32,7 +32,8 @@ If it's your first time using Travis then you need to define what OS, distributi
     dist: bionic
     language: python
     python:
-      -'3.7'```
+      -'3.7'
+  ```
       
 To read more about this, check out [Travis' Getting Started Guide](https://docs.travis-ci.com/user/tutorial/#to-get-started-with-travis-ci-using-github) and [Building a Python Project Guide](https://docs.travis-ci.com/user/languages/python/) or the guide specific to what programming language you want to use.
 
@@ -110,7 +111,8 @@ We need to put this script somewhere in the .travis.yml file, but it can't be ju
       skip_cleanup: true
       script:  scp -r $TRAVIS_BUILD_DIR $USERNAME@$HOSTNAME:/path/to/repository/files
       on:
-      branch: master```
+      branch: master
+```
 
 Or, if you created a separate `scripts/deploy.sh`, add the single `scp` command to the deploy.sh file and then your deploy script would look something like this:
 
@@ -119,7 +121,8 @@ Or, if you created a separate `scripts/deploy.sh`, add the single `scp` command 
       skip_cleanup: true
       script: bash scripts/deploy.sh
       on:
-        branch: master```
+        branch: master
+```
 
 That's all for deployment and if you want to run any commands post deployment, you could add an extra line in your deploy script:
 
@@ -137,7 +140,8 @@ It would look something like this:
     include:
       - stage: deploy
         if: branch = master AND type != pull_request
-        script: skip```
+        script: skip
+```
         
 What this does is that it runs the script only on a push to master and NOT if it's a pull request.
 
@@ -156,7 +160,8 @@ And your deploy script would look like:
          skip_cleanup: true
          script: bash scripts/deploy_testing.sh
          on:
-           branch: testing```
+           branch: testing
+```
 
 ## Conclusion
 
@@ -170,7 +175,8 @@ For example, if someone creates a pull request but their code is really ugly and
    include:
    - stage: flake8 test
      if: type = pull_request
-     script: flake8 .```
+     script: flake8 .
+```
      
 This runs a flake8 styling test and if the code doesn't abibe by it, the Travis build will fail.
 
