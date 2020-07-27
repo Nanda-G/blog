@@ -105,7 +105,7 @@ Before we start writing the deployment script, it would be nice to create a `scr
 
 The single line you would use to deploy is:
 
-`scp -r $TRAVIS_BUILD_DIR $USERNAME@$HOSTNAME:/path/to/repository/files`
+`ssh -i /tmp/deploy_rsa $USERNAME@$HOSTNAME "cd <repo-directory>; git pull origin <branch-name>"`
 
 We need to put this script somewhere in the .travis.yml file, but it can't be just anywhere. We need to follow Travis' build lifecycle events. So, we will use the deploy script lifecycle event which looks like this:
 
@@ -131,7 +131,7 @@ deploy:
 
 That's all for deployment and if you want to run any commands post deployment, you could add an extra line in your deploy script:
 
-`ssh -i /tmp/deploy_rsa $USERNAME@$HOSTNAME  "cd folder-name; <run any commands or scripts>"`
+`ssh -i /tmp/deploy_rsa $USERNAME@$HOSTNAME  "cd <repo-directory>; <run any command(s) or script(s)>;"`
 
 Make sure there aren't any process that linger or else the command will not exit and the build will fail.
 
