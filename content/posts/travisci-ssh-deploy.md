@@ -66,11 +66,11 @@ The `--add` flag automatically adds the required lines in the .travis.yml file.
 
 + Install Public SSH key on server
 
-`ssh-copy-id -i deploy_rsa.pub <USERNAME>@<DEPLOY-HOSTNAME>`
+`$ ssh-copy-id -i deploy_rsa.pub <USERNAME>@<DEPLOY-HOSTNAME>`
 
 + DELETE the keypair
 
-`rm -f deploy_rsa deploy_rsa.pub`
+`$ rm -f deploy_rsa deploy_rsa.pub`
 
 This is very IMPORTANT, make sure that the private key is not on the repository.
 
@@ -91,7 +91,7 @@ Alright, before we go ahead with deployment, lets add some secrets to the reposi
 
 1. Using the Travis CLI tool:
 
-`travis encrypt --pro SOMEVAR="secretvalue"`
+`$ travis encrypt --pro SOMEVAR="secretvalue"`
 
 But, that adds the values in the .travis.yml file which looks kinda ugly so I chose to add it using the travis-ci.com website, it really depends on what you want to do.
 
